@@ -15,13 +15,20 @@ COPY Pipfile.lock .
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
 
-FROM python:3.10-slim AS runtime
+FROM python:3.10-slim
 
 # Setup env
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
+
+# Install Tesseract OCR
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    tesseract-ocr tesseract-ocr-rus && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /.venv

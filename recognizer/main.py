@@ -12,5 +12,5 @@ print(pytesseract.get_languages(config=''))
 async def recognize_image(file: UploadFile) -> str:
     content = await file.read()
     image = Image.open(io.BytesIO(content))
-    text = pytesseract.image_to_string(image, lang='osd')
+    text = pytesseract.image_to_string(image, lang='rus')
     return text

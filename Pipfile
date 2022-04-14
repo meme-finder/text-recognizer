@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 fastapi = {extras = ["all"], version = "*"}
+pillow = "*"
+pytesseract = "*"
 
 [dev-packages]
 
